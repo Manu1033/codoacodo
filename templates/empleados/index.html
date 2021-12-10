@@ -1,3 +1,10 @@
+{%include 'header.html'%}
+
+<br>
+<a href="{{url_for("create")}}" class="btn btn-primary">Crear Empleaducho</a>
+<br>
+<br>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +14,30 @@
     <title>Pagina inicio</title>
 </head>
 <body>
-    <h1>Anda Joya!!!!</h1>
+    <table class="table table-light">
+        <thead class="thead-light">
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Foto</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for empleado in empleados %}
+            <tr>
+                <td>{{empleado[0]}}</td>
+                <td>{{empleado[1]}}</td>
+                <td>{{empleado[2]}}</td>
+                <td><img class="img-thumbnail" width="100" src="/uploads/{{empleado[3]}}" alt="{{empleado[3]}}"></td>
+                <td><a href="/edit/{{empleado[0]}}" class="btn btn-warning" >Editar</a> | 
+                    <a onclick="return confirm('Posta lo queres eliminar?')" href="/destroy/{{empleado[0]}}" class="btn btn-danger">Borrar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
+
+{%include 'footer.html'%}
